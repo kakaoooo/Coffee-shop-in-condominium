@@ -43,12 +43,28 @@ export default function App() {
     if (modal !== "qr" || !qrPayload) return;
     const el = qrDivRef.current; if (!el) return;
     el.innerHTML = '';
+    
     const render = () => {
-      try { new window.QRCode(el, { text: qrPayload, width: 200, height: 200, colorDark: "#000000", colorLight: "#ffffff", correctLevel: window.QRCode?.CorrectLevel?.M ?? 0 }); }
-      catch (e) { el.innerHTML = `<div style="width:200px;text-align:center;padding:10px;color:red">⚠️ สแกนไม่ได้<br/>โอนที่ ${PROMPTPAY_NUMBER}</div>`; }
+      try { 
+        new window.QRCode(el, { text: qrPayload, width: 200, height: 200, colorDark: "#000000", colorLight: "#ffffff", correctLevel: window.QRCode?.CorrectLevel?.M ?? 0 }); 
+      } catch (e) { 
+        el.innerHTML = `<div style="width:200px;text-align:center;padding:10px;color:red">⚠️ สแกนไม่ได้<br/>โอนที่ ${PROMPTPAY_NUMBER}</div>`; 
+      }
     };
-    if (window.QRCode) { render(); } else {
-      const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'; s.onload = render; document.body.appendChild(s);
+
+    // check if QRCode library is already loaded, if not load it and then render the QR code
+    if (window.QRCode) { 
+      render(); 
+    } else {
+      const scriptId = 'qrcode-js-script';
+      let s = document.getElementById(scriptId);
+      if (!s) {
+        s = document.createElement('script'); 
+        s.id = scriptId; // กำหนด ID ให้สคริปต์
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'; 
+        document.body.appendChild(s);
+      }
+      s.addEventListener('load', render);
     }
   }, [modal, qrPayload]);
 
@@ -65,7 +81,7 @@ export default function App() {
             }, 10000);
           }
         }).catch(console.error);
-      }, 3000);
+      }, 10000); // check every 10 seconds instead of 3 seconds
     }
     return () => clearInterval(interval);
   }, [myOrderId, orderStatus]);
