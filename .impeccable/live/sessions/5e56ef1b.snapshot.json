@@ -1,0 +1,22 @@
+{
+  "id": "5e56ef1b",
+  "phase": "discarded",
+  "pageUrl": "/",
+  "sourceFile": "frontend/src/App.jsx",
+  "expectedVariants": 3,
+  "arrivedVariants": 3,
+  "visibleVariant": 3,
+  "paramValues": {
+    "opacity": 0.3
+  },
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 13,
+  "activeOwner": "8e8a77ee",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-10T09:10:56.385Z"
+}

@@ -1,0 +1,480 @@
+/* ==================================================
+   1. Visual Foundation (Color, Typography, Spacing)
+================================================== */
+:root {
+  /* OKLCH Colors - Tinted toward brand espresso */
+  --background: oklch(98% 0.01 45); /* Paper Filter */
+  --foreground: oklch(25% 0.04 45); /* Coffee Bean */
+  --card: oklch(100% 0 0);
+  --primary: oklch(38% 0.12 45); /* Roasted Espresso */
+  --primary-hover: oklch(30% 0.1 45);
+  --secondary: oklch(78% 0.08 75); /* Steamed Milk */
+  --accent: oklch(75% 0.1 110); /* Matcha Green */
+  --gold: oklch(85% 0.12 85); /* Crema Gold */
+  --destructive: oklch(55% 0.2 25);
+  
+  --border: oklch(25% 0.04 45 / 0.08);
+  --input-background: oklch(95% 0.01 45);
+  
+  /* Typography Scale (Ratio 1.25) */
+  --font-display: "Segoe UI", system-ui, sans-serif;
+  --font-body: "Segoe UI", system-ui, sans-serif;
+  
+  /* Interactive Depth Tokens */
+  --shadow-interactive: 0 8px 16px oklch(38% 0.12 45 / 0.08);
+  --shadow-lift: 0 12px 24px oklch(38% 0.12 45 / 0.15);
+  --shadow-cart: 0 20px 40px oklch(38% 0.12 45 / 0.3);
+  
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  
+  --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); /* Exponential Ease-out */
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 140px;
+  min-height: 100vh;
+}
+
+/* ==================================================
+   2. Header & Layout Rhythm  
+================================================== */
+.header {
+  padding: 120px 24px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: radial-gradient(circle at center, var(--background) 20%, oklch(38% 0.12 45 / 0.05) 100%),
+              url("data:image/svg+xml,%3Csvg width='800' height='800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 400 Q 200 300 400 400 T 800 400 M0 450 Q 200 350 400 450 T 800 450 M0 500 Q 200 400 400 500 T 800 500' stroke='oklch(0.38 0.12 45 / 0.2)' fill='none'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+}
+
+.header-tagline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  opacity: 0.6;
+  color: var(--primary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.5); opacity: 1; }
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--foreground);
+}
+
+.header-desc {
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  margin-top: 52px;
+  background: linear-gradient(90deg, transparent, oklch(38% 0.12 45 / 0.07), transparent);
+  background-size: 200% 100%;
+  animation: steam-drift 8s infinite linear;
+  padding: 4px 40px;
+  border-radius: 20px;
+  max-width: 40ch;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--foreground);
+}
+
+@keyframes steam-drift {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ==================================================
+   3. Redesigned Menu Grid (Editorial)
+================================================== */
+.menu-container {
+  padding: 0 24px;
+}
+
+.category-section {
+  margin-bottom: 60px;
+}
+
+.category-title {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--primary);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.category-title::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--border);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 32px;
+}
+
+/* ==================================================
+   4. Menu Card (Interactive Depth)
+================================================== */
+.menu-card {
+  background: var(--card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+  border: 1px solid var(--border);
+}
+
+.menu-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--shadow-interactive);
+  opacity: 0;
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+.menu-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: transparent;
+}
+
+.menu-card:hover::after {
+  opacity: 1;
+}
+
+.menu-card.in-cart {
+  background: oklch(38% 0.12 45 / 0.03);
+  border-color: var(--primary);
+}
+
+.menu-card-image-wrapper {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background: var(--input-background);
+}
+
+.menu-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.menu-card:hover .menu-card-image {
+  transform: scale(1.1);
+}
+
+.menu-card-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.menu-card-desc {
+  font-size: 14px;
+  color: var(--foreground);
+  opacity: 0.6;
+  line-height: 1.6;
+}
+
+/* ==================================================
+   5. Interactive Elements
+================================================== */
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 16px 24px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  border-radius: var(--radius-sm);
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--input-background);
+  border-color: var(--foreground);
+}
+
+.field-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--primary);
+  opacity: 0.5;
+  margin-bottom: 8px;
+  display: block;
+}
+.input-field-subtle {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 16px 0;
+  color: oklch(25% 0.04 45 / 0.6);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  width: 100%;
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+}
+
+.input-field-subtle:focus {
+  border-color: var(--primary);
+}
+
+.login-title-delighted {
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  margin-bottom: 40px;
+  line-height: 1;
+  color: var(--primary);
+  text-align: center;
+  margin-top: 0;
+}
+
+.card-login {
+  padding: 60px 40px;
+  border-radius: var(--radius-lg);
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.btn-login {
+  margin-top: 60px;
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  width: auto;
+  padding: 12px 60px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-login::before {
+  content: "Ready to brew?";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.4;
+  white-space: nowrap;
+}
+
+.btn-login:hover {
+  background: oklch(38% 0.12 45 / 0.05);
+}
+
+.cat-tabs {
+  display: flex;
+  gap: 12px;
+  padding: 0 24px 40px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.cat-btn {
+  padding: 10px 24px;
+  border-radius: 40px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.cat-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* ==================================================
+   6. Premium Cart & Modals
+================================================== */
+.floating-cart {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: 320px;
+  z-index: 100;
+}
+
+.floating-cart-btn {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 60px;
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-cart);
+  transition: var(--transition);
+}
+
+.floating-cart-btn:hover {
+  transform: translateY(-4px);
+  background: var(--primary-hover);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: oklch(25% 0.04 45 / 0.4);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal-content {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 40px 80px oklch(0% 0 0 / 0.15);
+  position: relative;
+}
+
+/* ==================================================
+   📱 Mobile Refinement
+================================================== */
+@media (max-width: 768px) {
+  .header { padding: 60px 20px 32px; }
+  .header-title { font-size: 3.2rem; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .modal-content { padding: 24px; }
+}

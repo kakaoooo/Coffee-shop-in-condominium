@@ -1,0 +1,22 @@
+{
+  "id": "84abb404",
+  "phase": "variants_ready",
+  "pageUrl": "/%E0%B8%83",
+  "sourceFile": "frontend/src/App.jsx",
+  "expectedVariants": 4,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {
+    "line": 0.2
+  },
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 16,
+  "activeOwner": "f7983272",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-10T08:50:17.893Z"
+}

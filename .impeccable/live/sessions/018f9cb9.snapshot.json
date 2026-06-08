@@ -1,0 +1,37 @@
+{
+  "id": "018f9cb9",
+  "phase": "agent_error",
+  "pageUrl": "/%E0%B8%83",
+  "sourceFile": "frontend\\src\\App.jsx",
+  "expectedVariants": 3,
+  "arrivedVariants": 3,
+  "visibleVariant": 2,
+  "paramValues": {
+    "speed": "8s",
+    "opacity": 0.07
+  },
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 22,
+  "activeOwner": "149a0baf",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [
+    {
+      "error": "stale_checkpoint_ignored",
+      "revision": 1
+    },
+    {
+      "error": "carbonize_cleanup_required",
+      "file": "frontend\\src\\App.jsx",
+      "message": "Accepted variant still has carbonize markers that must be folded into source CSS."
+    },
+    {
+      "error": "agent_error",
+      "message": "Session markers not found for id: 018f9cb9"
+    }
+  ],
+  "updatedAt": "2026-05-10T08:14:57.168Z"
+}
