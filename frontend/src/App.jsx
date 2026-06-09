@@ -371,20 +371,32 @@ export default function App() {
         </Modal>
       )}
 
-      {/* Checkout Modal */}
+{/* Checkout Modal */}
       {modal === "checkout" && (
         <Modal onClose={() => setModal("cart")}>
           <button className="btn-secondary" style={{ marginBottom: 32, border: "none", padding: 0, fontSize: 13, opacity: 0.6 }} onClick={() => setModal("cart")}>← {t.backCart}</button>
           <h2 style={{ marginTop: 0, fontSize: 32, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 32 }}>{t.yourDetails}</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-            <div><label style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, display: "block", opacity: 0.6 }}>{t.namePH}</label><input className="input-field" style={{ background: "var(--input-background)", border: "none", borderRadius: 12, padding: 16, margin: 0 }} placeholder="Type your name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} /></div>
-            <div><label className="field-label">{t.unitLabel}</label><select className="input-field-subtle" value={form.unit} onChange={e => setForm({ ...form, unit: e.target.value })}>{UNIT_OPTIONS.map(u => <option key={u} value={u}>{u}</option>)}</select></div>
-            <div><label style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, display: "block", opacity: 0.6 }}>{t.notePH}</label><textarea className="input-field" style={{ background: "var(--input-background)", border: "none", borderRadius: 12, padding: 16, height: 100, resize: "none", margin: 0 }} placeholder="Any special requests?" value={form.note} onChange={e => setForm({ ...form, note: e.target.value })} /></div>
+            <div>
+              <label className="field-label">{t.namePH}</label>
+              <input className="input-field" style={{ background: "var(--input-background)", color: "var(--foreground)", border: "none", borderRadius: 12, padding: 16, margin: 0 }} placeholder="Type your name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
+            </div>
+
+            <div>
+              <label className="field-label">{t.unitLabel}</label>
+              <select className="input-field-subtle" value={form.unit} onChange={e => setForm({ ...form, unit: e.target.value })}>
+                {UNIT_OPTIONS.map(u => <option key={u} value={u}>{u}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="field-label">{t.notePH}</label>
+              <textarea className="input-field" style={{ background: "var(--input-background)", color: "var(--foreground)", border: "none", borderRadius: 12, padding: 16, height: 100, resize: "none", margin: 0 }} placeholder="Any special requests?" value={form.note} onChange={e => setForm({ ...form, note: e.target.value })} />
+            </div>
+
           </div>
           <button className="btn-primary" style={{ marginTop: 40, width: "100%", borderRadius: 40, padding: 20 }} disabled={!form.name.trim() || !form.unit.trim()} onClick={handleConfirmOrder}>{t.proceedPayment}</button>
         </Modal>
       )}
-
       {/* QR Modal */}
       {modal === "qr" && (
         <Modal onClose={() => setModal("checkout")}>
