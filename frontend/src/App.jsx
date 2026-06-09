@@ -195,7 +195,7 @@ export default function App() {
     </div>
   );
 
-  // ════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════
   // ADMIN VIEW
   // ════════════════════════════════════════════════════
   if (view === "admin") {
@@ -205,14 +205,30 @@ export default function App() {
           <div style={{ fontSize: 40, marginBottom: 10 }}>🔒</div><h2 className="login-title-delighted">LOGIN</h2>
           <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}><LangToggle /></div>
           <form onSubmit={handleLogin}>
-            <input className="input-field" type="password" placeholder={t.pwPH} value={adminPw} onChange={e => setAdminPw(e.target.value)} />
-            <button type="submit" className="btn-login">{t.loginBtn}</button>
+            <input 
+              className="input-field" 
+              type="password" 
+              placeholder={t.pwPH} 
+              value={adminPw} 
+              onChange={e => setAdminPw(e.target.value)} 
+              style={{ 
+                background: "var(--input-background)", 
+                color: "var(--foreground)", 
+                border: "none", 
+                borderRadius: 12, 
+                padding: 16, 
+                width: "100%",
+                boxSizing: "border-box",
+                marginBottom: 16 
+              }} 
+            />
+            
+            <button type="submit" className="btn-login" style={{ width: "100%", borderRadius: 40, padding: 16 }}>{t.loginBtn}</button>
           </form>
           <button className="btn-secondary" style={{ marginTop: 10, width: "100%", border: "none", color: "gray" }} onClick={() => setView("menu")}>{t.backToMenu}</button>
         </div>
       </div>
     );
-
     const filtered = adminOrders.filter(o => showDone ? o.status === "completed" : o.status !== "completed");
     return (
       <div className="app-wrapper">
