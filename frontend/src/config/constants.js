@@ -1,5 +1,5 @@
-export const API_BASE = `http://coffee-shop-in-condominium-production.up.railway.app/api`;
-export const UPLOADS_BASE = `http://coffee-shop-in-condominium-production.up.railway.app`;
+export const API_BASE = `https://coffee-shop-in-condominium-production.up.railway.app/api`;
+export const UPLOADS_BASE = `https://coffee-shop-in-condominium-production.up.railway.app`;
 
 export const BEAN_EXTRA = 10;
 export const MILK_EXTRA = 10;
